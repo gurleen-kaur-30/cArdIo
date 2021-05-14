@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+
+.input{
+    background-color: $white;
+    border-color: $text;
+    width: 70%;
+    height: 3.5vh;
+}
+
+.labelText{
+    font-size: 140%;
+    font-family: sans-serif;
+    font-weight: bolder;
+    color: $text;
+}

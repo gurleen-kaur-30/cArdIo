@@ -1,5 +1,7 @@
 import React from 'react'
 import TextInput from '../components/textinput'
+import styles from './styles/login.module.scss'
+import utilStyles from '../styles/util.module.scss'
 class Login extends React.Component {
   constructor(props){
     super(props);
@@ -10,6 +12,7 @@ class Login extends React.Component {
 
     this.setEmail = this.setEmail.bind(this)
     this.setPassword = this.setPassword.bind(this)
+    this.login = this.login.bind(this)
   }
 
   setEmail(event){
@@ -19,9 +22,15 @@ class Login extends React.Component {
   setPassword(event){
     this.setState({password: event.target.value})
   }
+  login(){
+    console.log("logged in!")
+  }
   render() {
     return (
-      <form>
+      <div className={styles.box}>
+      <form className={styles.form}>
+        <p className={utilStyles.headingXl}> LOGIN TO START YOUR FITNESS JOURNEY</p>
+       <div className={styles.innerBox}>
         <TextInput 
           labelName={"Email"}
           type={"text"}
@@ -35,7 +44,17 @@ class Login extends React.Component {
           value={this.state.password}
           onChange={this.setPassword}
         />
+        </div>
+        <div>
+        <button className={utilStyles.button} onClick={this.login}>
+          <text className={utilStyles.text}>
+            LOG IN
+          </text>
+        </button>
+        </div>
+       
       </form>
+      </div>
     )
   }
 }

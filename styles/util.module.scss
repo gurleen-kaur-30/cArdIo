@@ -12,20 +12,18 @@
   }
   
   .headingXl {
-    font-size: 3rem;
-    line-height: 0.6;
-    font-weight: 800;
+    font-size: 2rem;
+    font-weight: 700;
     text-align: center;
-    letter-spacing: -0.05rem;
-    margin: 1rem 0;
-    font-family: 'Product-Sans';
-    color: $secondary-color;
+    padding: 5%;
+    color: $text;
   }
   
   .headingLg {
     font-size: 1.5rem;
     line-height: 1.4;
     margin: 1rem 0;
+    color: $secondary-color;
   }
   
   .headingMd {
@@ -33,6 +31,9 @@
     line-height: 1.5;
   }
   
+  .text{
+    text-align: center;
+  }
   .borderCircle {
     border-radius: 9999px;
   }
@@ -57,4 +58,21 @@
   
   .lightText {
     color: #666;
+  }
+
+  .button{
+    margin-top: 10%;
+    width: 30%;
+    height: 5vh;
+    align-self: center;
+    display: flex;
+    margin-left: 35%;
+    text-align: center;
+  }
+
+  .text{
+    margin: auto;
+    font-size: 140%;
+    color: $primary-color;
+    font-weight: bolder;
   }
