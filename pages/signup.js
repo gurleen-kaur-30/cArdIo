@@ -49,7 +49,7 @@ class Login extends React.Component {
           value={this.state.password}
           onChange={this.setPassword}
         />
-          <TextInput 
+        <TextInput 
           labelName={"Confirm Password"}
           type={"text"}
           value={this.state.password}
