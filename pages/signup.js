@@ -7,12 +7,13 @@ class Login extends React.Component {
     super(props);
     this.state = {
         email: '',
-        password: ''
+        password: '',
+        confirmPassword : ''
     }
 
     this.setEmail = this.setEmail.bind(this)
     this.setPassword = this.setPassword.bind(this)
-    this.login = this.login.bind(this)
+    this.signup = this.signup.bind(this)
   }
 
   setEmail(event){
@@ -22,14 +23,18 @@ class Login extends React.Component {
   setPassword(event){
     this.setState({password: event.target.value})
   }
-  login(){
+
+  setConfirmPassword(event){
+      this.setState({confirmPassword: event.target.value})
+  }
+  signup(){
     console.log("logged in!")
   }
   render() {
     return (
       <div className={styles.box}>
       <form className={styles.form}>
-        <p className={utilStyles.headingXl}> LOGIN TO CONTINUE YOUR FITNESS JOURNEY</p>
+        <p className={utilStyles.headingXl}> SIGN UP TO START YOUR FITNESS JOURNEY</p>
        <div className={styles.innerBox}>
         <TextInput 
           labelName={"Email"}
@@ -44,11 +49,17 @@ class Login extends React.Component {
           value={this.state.password}
           onChange={this.setPassword}
         />
+          <TextInput 
+          labelName={"Confirm Password"}
+          type={"text"}
+          value={this.state.password}
+          onChange={this.setConfirmPassword}
+        />
         </div>
         <div>
-        <button className={utilStyles.button} onClick={this.login}>
+        <button className={utilStyles.button} onClick={this.signup}>
           <text className={utilStyles.text}>
-            LOG IN
+            SIGN UP
           </text>
         </button>
         </div>
