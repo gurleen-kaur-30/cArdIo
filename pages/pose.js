@@ -3,13 +3,13 @@ import * as tf from '@tensorflow/tfjs';
 import * as React from 'react'
 import {  isMobile, drawKeypoints, drawSkeleton } from '../public/utils'
 import utilStyles from '../styles/util.module.scss'
+import styles from './styles/pose.module.scss'
 
 export default class PoseNet extends React.Component {
 
   static defaultProps = {
     videoWidth: 600,
     videoHeight: 500,
-    flipHorizontal: true,
     algorithm: 'single-pose',
     // showVideo: true,
     showSkeleton: true,
@@ -110,7 +110,6 @@ export default class PoseNet extends React.Component {
     const {
       algorithm,
       imageScaleFactor,
-      flipHorizontal,
       outputStride,
       minPoseConfidence,
       maxPoseDetections,
@@ -134,7 +133,6 @@ export default class PoseNet extends React.Component {
     const pose = await net.estimateSinglePose(
         video,
         imageScaleFactor,
-        flipHorizontal,
         outputStride
     )
 
@@ -143,21 +141,21 @@ export default class PoseNet extends React.Component {
 
       ctx.clearRect(0, 0, videoWidth, videoHeight);
 
-      if (showVideo) {
-        ctx.save()
-        ctx.scale(-1, 1)
-        ctx.translate(-videoWidth, 0)
-        // ctx.drawImage(video, 0, 0, videoWidth, videoHeight)
-        ctx.restore()
-      }
+      // if (showVideo) {
+      //   ctx.save()
+      //   ctx.scale(-1, 1)
+      //   ctx.translate(-videoWidth, 0)
+      //   // ctx.drawImage(video, 0, 0, videoWidth, videoHeight)
+      //   ctx.restore()
+      // }
 
       // For each pose (i.e. person) detected in an image, loop through the poses
       // and draw the resulting skeleton and keypoints if over certain confidence
       // scores
       poses.forEach(async ({ score, keypoints }) => {
         if (score >= minPoseConfidence) {
-        
-          if((keypoints[10].position.y <= keypoints[6].position.y + 1 )){
+          console.log(keypoints)
+          if((keypoints[10].position.y <= keypoints[6].position.y + 30 && keypoints[9].position.y <= keypoints[5].position.y + 30)){
               this.setState({up : true}, () => {
                 if(this.state.up && this.state.down){
                   this.setState({count : this.state.count + 1}, () => {
@@ -167,7 +165,7 @@ export default class PoseNet extends React.Component {
               })
               
           }
-          if(keypoints[10].position.y >= keypoints[6].position.y + 1 + 150){
+          if(keypoints[10].position.y >= keypoints[6].position.y + 150 && keypoints[9].position.y >= keypoints[5].position.y + 150){
             this.setState({down : true, up: false})
           }
           if (showPoints) {
@@ -194,8 +192,8 @@ export default class PoseNet extends React.Component {
     return (
       <div className="PoseNet">
         { loading }
-        <video playsInline ref={ this.getVideo }></video>
-        <canvas ref={ this.getCanvas }></canvas>
+        <video className={styles.videoCam} playsInline ref={ this.getVideo }></video>
+        <canvas className={styles.videoCam} ref={ this.getCanvas }></canvas>
         <text className={utilStyles.heading2Xl}> {this.state.count} </text>
       </div>
     )
