@@ -11,7 +11,7 @@ export default class PoseNet extends React.Component {
     videoHeight: 500,
     flipHorizontal: true,
     algorithm: 'single-pose',
-    showVideo: true,
+    // showVideo: true,
     showSkeleton: true,
     showPoints: true,
     minPoseConfidence: 0.1,
@@ -176,7 +176,6 @@ export default class PoseNet extends React.Component {
           if (showSkeleton) {
             drawSkeleton(keypoints, minPartConfidence, skeletonColor, skeletonLineWidth, ctx);
           }
-          console.log(this.state.up, this.state.down)
         
         }
         
