@@ -6,6 +6,7 @@ import React from 'react'
 import TextInput from '../components/textinput'
 import styles from './styles/login.module.scss'
 import utilStyles from '../styles/util.module.scss'
+import { auth } from '../config/firebase.ts';
 
   export default class Post extends React.Component{
 
@@ -22,7 +23,23 @@ import utilStyles from '../styles/util.module.scss'
         this.setEmail = this.setEmail.bind(this)
         this.setPassword = this.setPassword.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.signUp = this.signUp.bind(this)
     }
+
+    signUp( name, email, password ){
+      console.log("yoo")
+      return auth
+       .createUserWithEmailAndPassword(email, password)
+       .then((response) => {
+         console.log("yo")
+        console.log(response)
+       })
+       .catch((error) => {
+         console.log("error")
+         console.log(error)
+        return { error };
+       });
+     };
 
     setName(event){
         this.setState({name : event.target.value})
@@ -42,7 +59,8 @@ import utilStyles from '../styles/util.module.scss'
 
     async onSubmit() {
     console.log("Called onSubmit", this.state.name);
-    await axios.post('/api/user', { name: this.state.name, age : this.state.age, email: this.state.email, slug: dashify(this.state.email), password: this.state.password });
+    // await axios.post('/api/user', { name: this.state.name, age : this.state.age, email: this.state.email, slug: dashify(this.state.email), password: this.state.password });
+    this.signUp(this.state.name,this.state.email, this.state.password)
   }
 
       render(){

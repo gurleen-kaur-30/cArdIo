@@ -8,7 +8,7 @@ import 'firebase/auth'
 // so we don't need to.
 
 const firebaseAuthConfig = {
-  signInFlow: 'popup',
+  signInFlow: 'redirect',
   // Auth providers
   // https://github.com/firebase/firebaseui-web#configure-oauth-providers
   signInOptions: [
@@ -37,6 +37,7 @@ const FirebaseAuth = () => {
       setRenderAuth(true)
     }
   }, [])
+  console.log(setRenderAuth)
   return (
     <div>
       {renderAuth ? (
