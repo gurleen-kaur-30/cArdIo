@@ -8,6 +8,8 @@ import styles from './styles/login.module.scss'
 import utilStyles from '../styles/util.module.scss'
 import { auth } from '../config/firebase.ts';
 import Router from 'next/router'
+import firebase from 'firebase/app'
+
   export default class Post extends React.Component{
 
     constructor(props){
@@ -31,6 +33,15 @@ import Router from 'next/router'
       return auth
        .createUserWithEmailAndPassword(email, password)
        .then((response) => {
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+          displayName: name,
+        }).then(function() {
+          // Update successful.
+        }).catch(function(error) {
+            console.log("error updating name");
+          // An error happened.
+        });
         Router.push('/dashboard');
          console.log("yo")
         console.log(response)

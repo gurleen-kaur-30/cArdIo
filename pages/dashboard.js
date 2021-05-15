@@ -3,12 +3,16 @@ import Card from '../components/card.js'
 import utilStyles from '../styles/util.module.scss'
 import styles from './styles/dashboard.module.scss'
 import Link from 'next/link'
+import firebase from 'firebase/app'
 
 export default class Dashboard extends React.Component {
+    
     render() {
+        console.log("YAYYYYYYY",firebase.auth().currentUser);
       return(
           <div className={styles.body}>
               <div className={styles.textBox}>
+                    <text className={utilStyles.heading2Xl}>Hello {firebase.auth().currentUser.displayName}!</text>
                 <text className={utilStyles.heading2Xl}> Choose Your Exercise </text>
               </div>
               <div className={styles.cardsBox}>

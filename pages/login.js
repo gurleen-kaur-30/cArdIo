@@ -2,6 +2,9 @@ import React from 'react'
 import TextInput from '../components/textinput'
 import styles from './styles/login.module.scss'
 import utilStyles from '../styles/util.module.scss'
+import { auth } from '../config/firebase.ts';
+import Router from 'next/router'
+
 class Login extends React.Component {
   constructor(props){
     super(props);
@@ -22,13 +25,25 @@ class Login extends React.Component {
   setPassword(event){
     this.setState({password: event.target.value})
   }
-  login(){
-    console.log("logged in!")
+  login () {
+    console.log("logged in!");
+    return auth
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then((response) => {
+            // console.log("gfdh", response.user);
+            Router.push('/dashboard');
+        setUser(response.user);
+
+        return response.user;
+        })
+        .catch((error) => {
+        return { error };
+        });
   }
   render() {
     return (
       <div className={styles.box}>
-      <form className={styles.form}>
+      <div className={styles.form}>
         <p className={utilStyles.headingXl}> LOGIN TO CONTINUE YOUR FITNESS JOURNEY</p>
        <div className={styles.innerBox}>
         <TextInput 
@@ -53,7 +68,7 @@ class Login extends React.Component {
         </button>
         </div>
        
-      </form>
+      </div>
       </div>
     )
   }
