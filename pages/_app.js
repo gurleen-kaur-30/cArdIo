@@ -1,5 +1,9 @@
+import initAuth from '../utils/initAuth' // the module you created above
 
+initAuth()
 
-export default function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
+
+export default MyApp;
