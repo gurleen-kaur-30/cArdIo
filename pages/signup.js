@@ -7,7 +7,7 @@ import TextInput from '../components/textinput'
 import styles from './styles/login.module.scss'
 import utilStyles from '../styles/util.module.scss'
 import { auth } from '../config/firebase.ts';
-
+import Router from 'next/router'
   export default class Post extends React.Component{
 
     constructor(props){
@@ -25,12 +25,13 @@ import { auth } from '../config/firebase.ts';
         this.onSubmit = this.onSubmit.bind(this)
         this.signUp = this.signUp.bind(this)
     }
-
+    
     signUp( name, email, password ){
       console.log("yoo")
       return auth
        .createUserWithEmailAndPassword(email, password)
        .then((response) => {
+        Router.push('/dashboard');
          console.log("yo")
         console.log(response)
        })
@@ -59,14 +60,14 @@ import { auth } from '../config/firebase.ts';
 
     async onSubmit() {
     console.log("Called onSubmit", this.state.name);
-    // await axios.post('/api/user', { name: this.state.name, age : this.state.age, email: this.state.email, slug: dashify(this.state.email), password: this.state.password });
+    await axios.post('/api/user', { name: this.state.name, age : this.state.age, email: this.state.email, slug: dashify(this.state.email), password: this.state.password });
     this.signUp(this.state.name,this.state.email, this.state.password)
   }
 
       render(){
           return(
                 <div className={styles.box}>
-                  <form className={styles.form}>
+                  <div className={styles.form}>
                     <p className={utilStyles.headingXl}> SIGN UP TO START YOUR FITNESS JOURNEY</p>
                    <div className={styles.innerBox}>
                     <TextInput 
@@ -104,7 +105,7 @@ import { auth } from '../config/firebase.ts';
                     </button>
                     </div>
                    
-                  </form>
+                  </div>
                   </div>
               );
       }
