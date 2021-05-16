@@ -16,6 +16,8 @@ export default class Dashboard extends React.Component {
                     :
                     null
                 }
+                </div>
+                <div className={styles.textBox}>
                 <text className={utilStyles.heading2Xl}> Choose Your Exercise </text>
               </div>
               <div className={styles.cardsBox}>

@@ -4,12 +4,17 @@ import * as React from 'react'
 import {  isMobile, drawKeypoints, drawSkeleton } from '../public/utils'
 import utilStyles from '../styles/util.module.scss'
 import styles from './styles/pose.module.scss'
+import Router from 'next/router'
+
 
 export default class PoseNet extends React.Component {
+    
 
   static defaultProps = {
-    videoWidth: 600,
-    videoHeight: 500,
+    // videoWidth: 600,
+    // videoHeight: 500,
+    videoWidth: 1000,
+    videoHeight: 750,
     algorithm: 'single-pose',
     // showVideo: true,
     showSkeleton: true,
@@ -29,8 +34,11 @@ export default class PoseNet extends React.Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps)
-    this.state = { loading: true, count : 0 }
+    this.state = { loading: true, count : 0, stopState: false }
     this.sleep = this.sleep.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+    this.detectPose = this.detectPose.bind(this)
+    this.stopDetection = this.stopDetection.bind(this)
   }
 
   getCanvas = elem => {
@@ -58,7 +66,7 @@ export default class PoseNet extends React.Component {
       this.setState({ loading: false })
     }
 
-    this.detectPose()
+    // this.detectPose()
   }
 
   async setupCamera() {
@@ -67,7 +75,7 @@ export default class PoseNet extends React.Component {
       throw 'Browser API navigator.mediaDevices.getUserMedia not available'
     }
 
-    const { videoWidth, videoHeight } = this.props
+    const { videoWidth, videoHeight } = this.props;
     const video = this.video
     const mobile = isMobile()
 
@@ -96,14 +104,18 @@ export default class PoseNet extends React.Component {
   }
 
   detectPose() {
+
+    
     const { videoWidth, videoHeight } = this.props
     const canvas = this.canvas
+    if(this.state.stopState === false) {
     const ctx = canvas.getContext('2d')
 
     canvas.width = videoWidth
     canvas.height = videoHeight
 
     this.poseDetectionFrame(ctx)
+    }
   }
 
   poseDetectionFrame(ctx) {
@@ -141,13 +153,13 @@ export default class PoseNet extends React.Component {
 
       ctx.clearRect(0, 0, videoWidth, videoHeight);
 
-      // if (showVideo) {
-      //   ctx.save()
-      //   ctx.scale(-1, 1)
-      //   ctx.translate(-videoWidth, 0)
-      //   // ctx.drawImage(video, 0, 0, videoWidth, videoHeight)
-      //   ctx.restore()
-      // }
+    //   if (showVideo) {
+    //     ctx.save()
+    //     ctx.scale(-1, 1)
+    //     ctx.translate(-videoWidth, 0)
+    //     // ctx.drawImage(video, 0, 0, videoWidth, videoHeight)
+    //     ctx.restore()
+    //   }
 
       // For each pose (i.e. person) detected in an image, loop through the poses
       // and draw the resulting skeleton and keypoints if over certain confidence
@@ -185,16 +197,63 @@ export default class PoseNet extends React.Component {
     poseDetectionFrameInner()
   }
 
+  async onSubmit() {
+    Router.push('/dashboard');
+  }
+
+  stopDetection() {
+      console.log("STOPPINGGG", this.state.stopState)
+      this.state.stopState = true;
+      console.log("STOPPED", this.state.stopState)
+  }
+
   render() {
     const loading = this.state.loading
-      ? <div className="PoseNet__loading">{ this.props.loadingText }</div>
+      ? <text className={utilStyles.headingXl}> Please wait while we load our pose detector </text>
+    //   ? <div className="PoseNet__loading">{ this.props.loadingText }</div>
       : ''
     return (
       <div className="PoseNet">
         { loading }
-        <video className={styles.videoCam} playsInline ref={ this.getVideo }></video>
-        <canvas className={styles.videoCam} ref={ this.getCanvas }></canvas>
-        <text className={utilStyles.heading2Xl}> {this.state.count} </text>
+        {/* <div className={styles.row}>
+            <div className={styles.column}>
+                <video className={styles.videoCam} playsInline ref={ this.getVideo } style={ {width:"100%"}} ></video>
+            </div>
+            <div className={styles.column}>
+                <canvas className={styles.videoCam} ref={ this.getCanvas } style={{width:"100%"}}></canvas>
+            </div>
+        </div> */}
+        <video className={styles.videoCam} playsInline ref={ this.getVideo }  ></video>
+        <canvas className={styles.overlay} ref={ this.getCanvas }   ></canvas>
+        
+        {/* <text className={utilStyles.heading2Xl}> {this.state.count} </text> */}
+            <div className={styles.box} >
+                  <div className={styles.form}>
+                    <p className={utilStyles.headingXl}> Track your exercise here! </p>
+                   <div className={styles.innerBox}>
+                   <button className={styles.button} onClick={this.detectPose}>
+                      <text className={utilStyles.text}>
+                        START
+                      </text>
+                    </button>
+
+                    <text className={styles.text}> Count: {this.state.count} </text>
+                
+                    <button className={styles.button} onClick={this.stopDetection}>
+                      <text className={utilStyles.text}>
+                        STOP
+                      </text>
+                    </button>
+
+                    <button className={styles.bigbutton} onClick={this.onSubmit} >
+                      <text className={utilStyles.text}>
+                        GO BACK TO DASHBOARD
+                      </text>
+                    </button>
+                    </div> 
+                   
+                  </div>
+            </div>
       </div>
     )
   }

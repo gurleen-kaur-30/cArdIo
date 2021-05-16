@@ -1,5 +1,96 @@
+@import '../../styles/variables.scss';
+
 .videoCam{
     transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg); /* Safari and Chrome */
     -moz-transform:rotateY(180deg); 
+    // display: flexbox;
+    position: fixed;
+    top:0px;
+    left: 0px;
+    // width:50%;
+    // height:auto;
+
+    border-style: solid;
+    border-color: $primary-color;
+    border-radius: 0.75cm;
+    border-width: 1cm;      
 }
+// .row {
+//     display: flex;
+//     width:100%;
+//   }
+// .column {
+//     flex:50%;
+//     padding: 2px;
+//     border-style: solid;
+//     height: 70%;
+// }
+.overlay {
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); 
+    position: fixed; 
+    top: 1cm;
+    left: 1cm;
+    // width:50%;
+    // height:auto;
+  }
+
+.box{
+    background-color: $primary-color;
+    box-shadow:  30px 30px 60px 60px #e2e0e0;
+    width: 30vw;
+    position: 'absolute';
+    flex: 100%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    display: flex!important;
+    margin: auto;
+    margin-top: 7%;
+    z-index: 1000;
+    margin-left: 65%;
+}
+
+.form{
+    flex: 100%; 
+    align-content: center;
+    margin-bottom: 7%;
+}
+
+.innerBox{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+.button{
+    // margin-top: 10%;
+    width: 10vh;
+    height: 5vh;
+    align-self: center;
+    text-align: center;
+  }
+.bigbutton{
+    margin-top: 10%;
+    width: 30vh;
+    height: 5vh;
+    align-self: center;
+    text-align: center;
+  }
+
+.text{
+    width: 20vh;
+    height: 8vh;
+    margin: 10%;
+    align-self: center;
+    text-align: center;
+
+    font-size: 170%;
+    color: $primary-color;
+    font-weight: bold;
+    background-color: white;
+  }
