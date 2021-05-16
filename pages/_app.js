@@ -4,7 +4,11 @@ import {firebaseConfig} from '../config/firebase.ts'
 
 initAuth()
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+  try{
+    firebase.initializeApp(firebaseConfig);
+  } catch(e){
+    console.log(e)
+  }
 }else {
   firebase.app(); // if already initialized, use that one
 }
