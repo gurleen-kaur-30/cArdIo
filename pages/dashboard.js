@@ -8,11 +8,14 @@ import firebase from 'firebase/app'
 export default class Dashboard extends React.Component {
     
     render() {
-        console.log("YAYYYYYYY",firebase.auth().currentUser);
       return(
           <div className={styles.body}>
               <div className={styles.textBox}>
+                {firebase.auth().currentUser?
                     <text className={utilStyles.heading2Xl}>Hello {firebase.auth().currentUser.displayName}!</text>
+                    :
+                    null
+                }
                 <text className={utilStyles.heading2Xl}> Choose Your Exercise </text>
               </div>
               <div className={styles.cardsBox}>
