@@ -16,6 +16,11 @@
     border-radius: 0.75cm;
     border-width: 1cm;      
 }
+.rowButton{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
 // .row {
 //     display: flex;
 //     width:100%;
@@ -73,6 +78,7 @@
     height: 5vh;
     align-self: center;
     text-align: center;
+    margin: 1em;
   }
 .bigbutton{
     margin-top: 10%;

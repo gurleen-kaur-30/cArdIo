@@ -39,6 +39,7 @@ export default class PoseNet extends React.Component {
     this.onSubmit = this.onSubmit.bind(this)
     this.detectPose = this.detectPose.bind(this)
     this.stopDetection = this.stopDetection.bind(this)
+    this.resetDetection = this.resetDetection.bind(this)
   }
 
   getCanvas = elem => {
@@ -54,10 +55,7 @@ export default class PoseNet extends React.Component {
  }
 
   async componentDidMount() {
-    this.net = await posenet.load({architecture: 'ResNet50',
-    outputStride: 32,
-    inputResolution: { width: 257, height: 200 },
-    quantBytes: 2});
+    this.net = await posenet.load();
     try {
       await this.setupCamera()
     } catch(e) {
@@ -65,7 +63,6 @@ export default class PoseNet extends React.Component {
     } finally {
       this.setState({ loading: false })
     }
-
     // this.detectPose()
   }
 
@@ -104,18 +101,17 @@ export default class PoseNet extends React.Component {
   }
 
   detectPose() {
+    this.setState({stopState : false}, () => {
+      const { videoWidth, videoHeight } = this.props
+      const canvas = this.canvas
+      if(this.state.stopState == false) {
+      const ctx = canvas.getContext('2d')
 
-    
-    const { videoWidth, videoHeight } = this.props
-    const canvas = this.canvas
-    if(this.state.stopState === false) {
-    const ctx = canvas.getContext('2d')
+      canvas.width = videoWidth
+      canvas.height = videoHeight
 
-    canvas.width = videoWidth
-    canvas.height = videoHeight
-
-    this.poseDetectionFrame(ctx)
-    }
+      this.poseDetectionFrame(ctx)
+    }});
   }
 
   poseDetectionFrame(ctx) {
@@ -138,7 +134,7 @@ export default class PoseNet extends React.Component {
 
     const net = this.net
     const video = this.video
-
+    
     const poseDetectionFrameInner = async () => {
       let poses = []
 
@@ -153,17 +149,6 @@ export default class PoseNet extends React.Component {
 
       ctx.clearRect(0, 0, videoWidth, videoHeight);
 
-    //   if (showVideo) {
-    //     ctx.save()
-    //     ctx.scale(-1, 1)
-    //     ctx.translate(-videoWidth, 0)
-    //     // ctx.drawImage(video, 0, 0, videoWidth, videoHeight)
-    //     ctx.restore()
-    //   }
-
-      // For each pose (i.e. person) detected in an image, loop through the poses
-      // and draw the resulting skeleton and keypoints if over certain confidence
-      // scores
       poses.forEach(async ({ score, keypoints }) => {
         if (score >= minPoseConfidence) {
           console.log(keypoints)
@@ -190,11 +175,13 @@ export default class PoseNet extends React.Component {
         }
         
       })
-
-      requestAnimationFrame(poseDetectionFrameInner)
+      if(!this.state.stopState){
+        requestAnimationFrame(poseDetectionFrameInner)
+      }
     }
-
-    poseDetectionFrameInner()
+    if(!this.state.stopState){
+      poseDetectionFrameInner()
+    }
   }
 
   async onSubmit() {
@@ -202,9 +189,11 @@ export default class PoseNet extends React.Component {
   }
 
   stopDetection() {
-      console.log("STOPPINGGG", this.state.stopState)
-      this.state.stopState = true;
-      console.log("STOPPED", this.state.stopState)
+      this.setState({stopState : true});
+  }
+
+  resetDetection(){
+    this.setState({stopState : true, count : 0});
   }
 
   render() {
@@ -238,12 +227,19 @@ export default class PoseNet extends React.Component {
                     </button>
 
                     <text className={styles.text}> Count: {this.state.count} </text>
-                
+                    <div className={styles.rowButton}>
                     <button className={styles.button} onClick={this.stopDetection}>
                       <text className={utilStyles.text}>
                         STOP
                       </text>
                     </button>
+
+                    <button className={styles.button} onClick={this.resetDetection}>
+                      <text className={utilStyles.text}>
+                        RESET
+                      </text>
+                    </button>
+                    </div>
 
                     <button className={styles.bigbutton} onClick={this.onSubmit} >
                       <text className={utilStyles.text}>
