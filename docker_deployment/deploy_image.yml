@@ -1,0 +1,11 @@
+---
+- name: Pull docker image of cArdIo - fitness app
+  hosts: local
+  connection: local
+  vars:
+    ansible_python_interpreter: /usr/bin/python2.7
+  tasks:
+    - name: Pull image of cardio
+      docker_image:
+        name: prateksha/cardio
+        source: pull
