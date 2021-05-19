@@ -48,13 +48,13 @@ export default class Dashboard extends React.Component {
           <div className={styles.body}>
               <div className={styles.textBox}>
                 {firebase.auth().currentUser?
-                    <text className={utilStyles.heading2Xl}>Hello {firebase.auth().currentUser.displayName}!</text>
+                    <p className={utilStyles.heading2Xl}>Hello {firebase.auth().currentUser.displayName}!</p>
                     :
                     null
                 }
                 </div>
                 <div className={styles.textBox}>
-                <text className={utilStyles.heading2Xl}> Choose Your Exercise </text>
+                <p className={utilStyles.heading2Xl}> Choose Your Exercise </p>
               </div>
               <div className={styles.cardsBox}>
               <Card

@@ -62,9 +62,9 @@ class Login extends React.Component {
         </div>
         <div>
         <button className={utilStyles.button} onClick={this.login}>
-          <text className={utilStyles.text}>
+          <p className={utilStyles.text}>
             LOG IN
-          </text>
+          </p>
         </button>
         </div>
        
