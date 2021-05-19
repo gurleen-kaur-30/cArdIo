@@ -25,6 +25,7 @@
     margin-left: 20%;
     color: $primary-color;
     font-weight: bold;
+    margin-top: 1%;
   }
   
   .headingMd {
@@ -76,4 +77,9 @@
     font-size: 140%;
     color: $primary-color;
     font-weight: bolder;
+  }
+
+  .graph{
+    width: fit-content;
+    height: fit-content;
   }

@@ -14,7 +14,7 @@ export default class PoseNet extends React.Component {
   static defaultProps = {
     // videoWidth: 600,
     // videoHeight: 500,
-    videoWidth: 600,
+    videoWidth: 1000,
     videoHeight: 750,
     algorithm: 'single-pose',
     // showVideo: true,
@@ -42,6 +42,7 @@ export default class PoseNet extends React.Component {
     this.stopDetection = this.stopDetection.bind(this)
     this.resetDetection = this.resetDetection.bind(this)
     this.saveProgress = this.saveProgress.bind(this)
+    this.viewStats = this.viewStats.bind(this)
   }
 
   getCanvas = elem => {
@@ -56,9 +57,11 @@ export default class PoseNet extends React.Component {
     return new Promise(resolve => setTimeout(resolve, ms));
  }
 
-  saveProgress(){
+  async saveProgress(){
     const uid = firebase.auth().currentUser.uid
-    axios.post('api/exercises/bicepCurls', {uid : uid, count: this.state.count})
+    // await axios.get(`http://localhost:3000/api/exercises/bicepCurls/${uid}`)
+    // console.log(res) 
+    axios.post('/api/exercises/bicepCurls', {uid : uid, count: this.state.count})
   }
 
   async componentDidMount() {
@@ -107,6 +110,9 @@ export default class PoseNet extends React.Component {
     })
   }
 
+  async viewStats() {
+    Router.push('/stats')
+  }
   detectPose() {
     this.setState({stopState : false}, () => {
       const { videoWidth, videoHeight } = this.props
@@ -257,7 +263,7 @@ export default class PoseNet extends React.Component {
                     </div>
 
                     <div className={styles.rowButton}>
-                      <button className={styles.bigbutton} onClick={this.saveProgress}>
+                      <button className={styles.bigbutton} onClick={this.viewStats}>
                         <text className={utilStyles.text}> VIEW STATS</text>
                       </button>
                     </div>
