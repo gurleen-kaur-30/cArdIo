@@ -164,7 +164,6 @@ export default class PoseNet extends React.Component {
 
       poses.forEach(async ({ score, keypoints }) => {
         if (score >= minPoseConfidence) {
-          console.log(keypoints)
           if((keypoints[10].position.y <= keypoints[6].position.y + 30 && keypoints[9].position.y <= keypoints[5].position.y + 30)){
               this.setState({up : true}, () => {
                 if(this.state.up && this.state.down){
@@ -227,6 +226,7 @@ export default class PoseNet extends React.Component {
                 <canvas className={styles.videoCam} ref={ this.getCanvas } style={{width:"100%"}}></canvas>
             </div>
         </div> */}
+        
         <video className={styles.videoCam} playsInline ref={ this.getVideo }  ></video>
         <canvas className={styles.overlay} ref={ this.getCanvas }   ></canvas>
         

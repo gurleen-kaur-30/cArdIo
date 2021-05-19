@@ -5,7 +5,7 @@ export default async (req, res) => {
     const { slug } = req.body;
     const entries = await db.collection('users').get();
     console.log(req.body.uid)
-    const doc = entries.docs.map(entry => entry.data());
+    const entriesData = entries.docs.map(entry => entry.data());
     if (entriesData.some(entry => entry.slug === slug)) {
       res.status(400).end();
     } else {
