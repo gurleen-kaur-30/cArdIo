@@ -27,7 +27,7 @@ class Graph extends React.Component{
     }
 	async componentWillMount(){
         var uid = firebase.auth().currentUser.uid
-        const res = await axios.get(`http://localhost:3000/api/exercises/bicepCurls/${uid}`)
+        const res = await axios.get(`https://cardio-ai-trainer.herokuapp.com/api/exercises/bicepCurls/${uid}`)
         var newData = Object.entries(res.data).map((e) => ( e[1] ));
         var countArr = []
         var dateArr = []
