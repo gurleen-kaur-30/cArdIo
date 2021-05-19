@@ -10,21 +10,20 @@ import { GetServerSidePropsContext } from 'next'
 import { firebaseAdmin } from '../firebaseAdmin'
 import {firebaseClient} from '../firebaseClient'
 import Router  from 'next/router'
+import axios from 'axios';
+
 
 export const getServerSideProps = async (GetServerSidePropsContext) => {
   try {
     const cookies = nookies.get(GetServerSidePropsContext);
-    console.log(JSON.stringify(cookies, null, 2));
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const { uid, email } = token;
-
-    // the user is authenticated!
-    // FETCH STUFF HERE
-
+    await axios.get(`http://localhost:3000/api/user/${uid}`);
     return {
-      props: { message: `Your email is ${email} and your UID is ${uid}.` },
+      props: {uid},
     };
   } catch (err) {
+    console.log(err)
     // either the `token` cookie didn't exist
     // or token verification failed
     // either way: redirect to the login page
@@ -75,7 +74,7 @@ export default class Dashboard extends React.Component {
                     .auth()
                     .signOut()
                     .then(() => {
-                      Router.push("/home");
+                      Router.push("/login");
                     });
                 }}
               >

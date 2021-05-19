@@ -5,6 +5,7 @@ import utilStyles from '../styles/util.module.scss'
 import { auth } from '../config/firebase.ts';
 import Router from 'next/router'
 
+
 class Login extends React.Component {
   constructor(props){
     super(props);
@@ -30,7 +31,6 @@ class Login extends React.Component {
     return auth
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((response) => {
-            // console.log("gfdh", response.user);
             Router.push('/dashboard');
         setUser(response.user);
 

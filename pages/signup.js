@@ -29,7 +29,6 @@ import firebase from 'firebase/app'
     }
     
     signUp( name, email, password ){
-      console.log("yoo")
       return auth
        .createUserWithEmailAndPassword(email, password)
        .then((response) => {
@@ -42,9 +41,8 @@ import firebase from 'firebase/app'
             console.log("error updating name");
           // An error happened.
         });
+        axios.post('/api/user', { name: this.state.name, age : this.state.age, email: this.state.email, slug: dashify(this.state.email), uid: response.user.uid  });
         Router.push('/dashboard');
-         console.log("yo")
-        console.log(response)
        })
        .catch((error) => {
          console.log("error")
@@ -71,7 +69,6 @@ import firebase from 'firebase/app'
 
     async onSubmit() {
     console.log("Called onSubmit", this.state.name);
-    await axios.post('/api/user', { name: this.state.name, age : this.state.age, email: this.state.email, slug: dashify(this.state.email), password: this.state.password });
     this.signUp(this.state.name,this.state.email, this.state.password)
   }
 

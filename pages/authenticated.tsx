@@ -53,7 +53,7 @@ function AuthenticatedPage(
             .auth()
             .signOut()
             .then(() => {
-              router.push("/");
+              router.push("/login");
             });
         }}
       >
