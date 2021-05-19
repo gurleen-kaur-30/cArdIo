@@ -5,6 +5,7 @@ import {  isMobile, drawKeypoints, drawSkeleton } from '../public/utils'
 import utilStyles from '../styles/util.module.scss'
 import styles from './styles/pose.module.scss'
 import Router from 'next/router'
+import axios from 'axios';
 
 
 export default class PoseNet extends React.Component {
@@ -13,7 +14,7 @@ export default class PoseNet extends React.Component {
   static defaultProps = {
     // videoWidth: 600,
     // videoHeight: 500,
-    videoWidth: 1000,
+    videoWidth: 600,
     videoHeight: 750,
     algorithm: 'single-pose',
     // showVideo: true,
@@ -40,6 +41,7 @@ export default class PoseNet extends React.Component {
     this.detectPose = this.detectPose.bind(this)
     this.stopDetection = this.stopDetection.bind(this)
     this.resetDetection = this.resetDetection.bind(this)
+    this.saveProgress = this.saveProgress.bind(this)
   }
 
   getCanvas = elem => {
@@ -53,6 +55,11 @@ export default class PoseNet extends React.Component {
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
  }
+
+  saveProgress(){
+    const uid = firebase.auth().currentUser.uid
+    axios.post('api/exercises/bicepCurls', {uid : uid, count: this.state.count})
+  }
 
   async componentDidMount() {
     this.net = await posenet.load();
@@ -202,7 +209,9 @@ export default class PoseNet extends React.Component {
     //   ? <div className="PoseNet__loading">{ this.props.loadingText }</div>
       : ''
     return (
-      <div className="PoseNet">
+      <html className={styles.poseNet}>
+      <text className={utilStyles.headingLg}> Bicep Curls </text>
+      <div className={styles.row}>
         { loading }
         {/* <div className={styles.row}>
             <div className={styles.column}>
@@ -241,6 +250,18 @@ export default class PoseNet extends React.Component {
                     </button>
                     </div>
 
+                    <div className={styles.rowButton}>
+                      <button className={styles.bigbutton} onClick={this.saveProgress}>
+                        <text className={utilStyles.text}> SAVE PROGRESS</text>
+                      </button>
+                    </div>
+
+                    <div className={styles.rowButton}>
+                      <button className={styles.bigbutton} onClick={this.saveProgress}>
+                        <text className={utilStyles.text}> VIEW STATS</text>
+                      </button>
+                    </div>
+
                     <button className={styles.bigbutton} onClick={this.onSubmit} >
                       <text className={utilStyles.text}>
                         GO BACK TO DASHBOARD
@@ -250,7 +271,8 @@ export default class PoseNet extends React.Component {
                    
                   </div>
             </div>
-      </div>
+            </div>
+      </html>
     )
   }
 }
