@@ -15,7 +15,7 @@ import firebase from 'firebase/app'
     constructor(props){
         super(props);
         this.state={
-            email: '',
+            email: '',  
             name: '',
             age : '',
             password : ''
