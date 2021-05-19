@@ -1,24 +1,31 @@
 pipeline {
     agent any
-    tools {
-        maven 'maven'
-    }
-    options {
-        skipDefaultCheckout(true)
-    }
  
     stages {
         stage('Checkout SCM') {
             steps {
                 echo '> Checking out the source control ...'
-                checkout scm
+                git branch: 'main', url: 'https://github.com/gurleen-kaur-30/cardio'
             }
         }
 
+        stage('Setting up env variables'){
+            steps{
+                
+                script{
+                    withCredentials([file(credentialsId: 'env-var', variable: 'env_var')]) {
+                    sh 'rm .env.local'
+                    sh "cp \$env_var .env.local"
+                    }
+                }
+            }
+        }
+        
+        
         stage('Docker build'){
             steps{
                 script{
-                    dockerImage = docker.build "gurleenk/cardio:latest"
+                    dockerImage = docker.build "prateksha/cardio:latest"
                 }
             }
         }
@@ -26,7 +33,7 @@ pipeline {
         stage('Push Image to docker hub'){
             steps{
                 script{
-                    docker.withRegistry('', 'docker-jenkins'){
+                    docker.withRegistry('', 'docker-hub'){
                         dockerImage.push()
                     }
                 }
