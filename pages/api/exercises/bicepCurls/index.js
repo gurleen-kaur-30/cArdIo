@@ -1,10 +1,21 @@
 import db from '../../../../utils/db'
+import { configure, getLogger } from 'log4js';
 
 export default async (req, res) => {
     try {
       const { slug } = req.body;
       console.log(req.body.uid)
       console.log("timeee", new Date().getHours(), new Date().getMinutes())
+
+      const log4js = require('log4js');
+      const log_loc = require("../../../../log4js_config.json");
+
+      log4js.configure(log_loc);
+
+      // // Create the logger
+      const logger = log4js.getLogger();
+      logger.level = 'info';          
+
       const entries = await db.collection('bicepCurls').doc(req.body.uid).get()
       if(!entries.data()){
           var newData = []
@@ -25,7 +36,6 @@ export default async (req, res) => {
         
         newData.push({...req.body,created: new Date(),
         })
-    //    console.log(newData)
           await db.collection('bicepCurls').doc(req.body.uid).set({
             ...newData,
           });
@@ -43,8 +53,10 @@ export default async (req, res) => {
         // });
         // res.status(200).end();
     //   }
+    logger.info({"Message": "Progress saved", "UID": req.body.uid, "Bicep_Curl_Count": req.body.count, "Created": new Date()});
     } catch (e) {
       console.log("errorr", e)
+      logger.info({"Message": "Error while saving progress for bicep curl"});
       res.status(400).end();
     }
   }

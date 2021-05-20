@@ -5,7 +5,6 @@ import utilStyles from '../styles/util.module.scss'
 import { auth } from '../config/firebase.ts';
 import Router from 'next/router'
 
-
 class Login extends React.Component {
   constructor(props){
     super(props);
@@ -29,6 +28,12 @@ class Login extends React.Component {
   login () {
     console.log("logged in!");
     console.info("Logged user in");
+    // const log4js = require('log4js');
+    // log4js.configure("./log4js_config.json");
+
+    // // Create the logger
+    // logger = log4js.getLogger();
+    // logger.level = 'info';
     return auth
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((response) => {
