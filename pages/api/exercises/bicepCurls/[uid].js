@@ -24,7 +24,8 @@ export default async (req, res) => {
         res.status(404).end();
       } else {
         res.status(200).json(doc.data());
-        logger.info({"Message": "Stats for bicep curls", "UID": req.query.uid, "Times_progress_saved": Object.keys(doc.data()).length});
+        logger.info("[Stats for bicep curls] ["+ req.query.uid + "] [Times_progress_saved] [" +  Object.keys(doc.data()).length + "]");
+        // logger.info({"Message": "Stats for bicep curls", "UID": req.query.uid, "Times_progress_saved": Object.keys(doc.data()).length});
         console.log(doc.data())
       }
       

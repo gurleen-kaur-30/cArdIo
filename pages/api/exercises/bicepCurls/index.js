@@ -53,7 +53,8 @@ export default async (req, res) => {
         // });
         // res.status(200).end();
     //   }
-    logger.info({"Message": "Progress saved", "UID": req.body.uid, "Bicep_Curl_Count": req.body.count, "Created": new Date()});
+    logger.info("[Progress saved] [" + req.body.uid + "] [Bicep_Curl_Count] [" + req.body.count + "]");
+    // logger.info({"Message": "Progress saved", "UID": req.body.uid, "Bicep_Curl_Count": req.body.count, "Created": new Date()});
     } catch (e) {
       console.log("errorr", e)
       logger.info({"Message": "Error while saving progress for bicep curl"});

@@ -1,17 +1,3 @@
-2021-05-20T23:03:18.464 [INFO] {
-  Message: 'Progress saved',
-  UID: 'koP2GUaplNVeG84S9o8srLCR3D62',
-  Bicep_Curl_Count: 12,
-  Created: 2021-05-20T17:33:18.463Z
-}
-2021-05-20T23:03:37.501 [INFO] {
-  Message: 'Progress saved',
-  UID: 'koP2GUaplNVeG84S9o8srLCR3D62',
-  Bicep_Curl_Count: 24,
-  Created: 2021-05-20T17:33:37.501Z
-}
-2021-05-20T23:12:29.414 [INFO] {
-  Message: 'Stats for bicep curls',
-  UID: 'koP2GUaplNVeG84S9o8srLCR3D62',
-  Times_progress_saved: 9
-}
+2021-05-20T23:41:59.259 [INFO] [Progress saved] [nZuKmSutceTrRlHFzj6Lm7sVkl92] [Bicep_Curl_Count] [15]
+2021-05-20T23:42:34.508 [INFO] [Progress saved] [nZuKmSutceTrRlHFzj6Lm7sVkl92] [Bicep_Curl_Count] [30]
+2021-05-20T23:42:37.685 [INFO] [Stats for bicep curls] [nZuKmSutceTrRlHFzj6Lm7sVkl92] [Times_progress_saved] [2]
