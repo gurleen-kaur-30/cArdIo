@@ -14,7 +14,6 @@ pipeline {
                 
                 script{
                     withCredentials([file(credentialsId: 'env-var', variable: 'env_var')]) {
-                    sh 'rm .env.local'
                     sh "cp \$env_var .env.local"
                     }
                 }
