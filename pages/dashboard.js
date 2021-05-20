@@ -18,7 +18,6 @@ export const getServerSideProps = async (GetServerSidePropsContext) => {
     const cookies = nookies.get(GetServerSidePropsContext);
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const { uid, email } = token;
-    // await axios.get(`https://cardio-ai-trainer.herokuapp.com/api/user/${uid}`);
     await axios.get(`http://localhost:3000/api/user/${uid}`);
     return {
       props: {uid},
