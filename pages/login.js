@@ -28,6 +28,7 @@ class Login extends React.Component {
   }
   login () {
     console.log("logged in!");
+    console.info("Logged user in");
     return auth
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((response) => {
