@@ -23,10 +23,25 @@ pipeline {
         stage('Running tests'){
             steps{
                 script{
-                    sh 'yarn test --verbose'
+                    sh 'yarn test'
                 }
             }
+
+          post {
+        always {
+          publishHTML target: [
+            allowMissing         : false,
+            alwaysLinkToLastBuild: false,
+            keepAll             : true,
+            reportDir            : 'output/coverage/jest',
+            reportFiles          : 'index.html',
+            reportName           : 'Test Report'
+          ]
         }
+      }
+            
+        }
+        
          stage('Docker build'){
             steps{
                 script{

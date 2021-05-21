@@ -1,6 +1,47 @@
+@import '../styles/variables.scss';
+
 .container{
-    // background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("../public/dumbbell.webp"), no-repeat;
-    background: url("../public/home.webp");
+     background: linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,.3)), url("../public/home.webp"), no-repeat;
+    // background: url("../public/home.webp");
     background-size: cover;
     z-index: -1;
+    height: 110vh;
+    margin-top: -4%;
+    position: relative;
 }
+
+.head{
+    background-color: $primary-color;
+    width: 50%;
+    margin: auto;
+    border-color: $secondary-color;
+    height: 25%;
+    padding-top: 2%;
+    border-width: 2cm;
+    position: overlay;
+    margin-top: -52%;
+    // z-index: 100;
+
+}
+
+.heading2Xl {
+    margin: auto;
+    text-align: center;
+    font-size: 5rem;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.05rem;
+    color: $white;
+    font-family: 'Product-Sans';
+    font-style: italic;
+  }
+
+  .button{
+    margin-top: 7%;
+    width: 20%;
+    height: 5vh;
+    align-self: center;
+    display: flex;
+    margin-left: 40%;
+    text-align: center;
+  }

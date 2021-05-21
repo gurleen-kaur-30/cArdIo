@@ -5,26 +5,24 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div>
-    {/* <Head >
-      <p className={utilStyles.heading2Xl}>cArdIo</p>
-      <p className={utilStyles.headingXl}> Your personal AI trainer</p>
-    </Head> */}
-    <p className={utilStyles.heading2Xl}> cArdIo </p>
-    <p className={utilStyles.heading2Xl}> Your personal AI trainer</p>
+    <div >
+      <div className={styles.container}/>
+    <div className={styles.head}>
+    <p className={styles.heading2Xl}> cArdIo </p>
+    <p className={styles.heading2Xl}> Your personal AI trainer</p>
+    </div>
     <div className={styles.row}>
     <Link href={"/login"}>
-    <button className={utilStyles.button}>
+    <button className={styles.button}>
       <p className={utilStyles.text}> Log In</p>
     </button>
     </Link>
     <Link href={"/signup"}>
-    <button className={utilStyles.button}>
+    <button className={styles.button}>
       <p className={utilStyles.text}> Sign Up </p>
     </button>
     </Link>
     </div>
-
     </div>
   )
 }
