@@ -27,10 +27,10 @@ pipeline {
                 }
             }
         }
-        stage('Docker build'){
+         stage('Docker build'){
             steps{
                 script{
-                    dockerImage = docker.build "prateksha/cardio:latest"
+                    dockerImage = docker.build "gurleenk/cardio:latest"
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
         stage('Push Image to docker hub'){
             steps{
                 script{
-                    docker.withRegistry('', 'docker-hub'){
+                    docker.withRegistry('', 'docker-jenkins'){
                         dockerImage.push()
                     }
                 }
