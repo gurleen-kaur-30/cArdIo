@@ -1,5 +1,4 @@
 import db from '../../../../utils/db'
-import { configure, getLogger } from 'log4js';
 
 export default async (req, res) => {
     try {
@@ -57,7 +56,6 @@ export default async (req, res) => {
     // logger.info({"Message": "Progress saved", "UID": req.body.uid, "Bicep_Curl_Count": req.body.count, "Created": new Date()});
     } catch (e) {
       console.log("errorr", e)
-      logger.info({"Message": "Error while saving progress for bicep curl"});
       res.status(400).end();
     }
   }
