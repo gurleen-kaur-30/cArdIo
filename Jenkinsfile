@@ -44,5 +44,12 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploying using Ansible') {
+            steps {
+                ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'Ansible', 
+                inventory: 'docker_deployment/inventory', playbook: 'docker_deployment/deploy_image.yml', sudoUser: null
+            }
+        }
     }
 }
