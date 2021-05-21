@@ -107,9 +107,9 @@ import firebase from 'firebase/app'
                     </div>
                     <div>
                     <button className={utilStyles.button} onClick={this.onSubmit}>
-                      <text className={utilStyles.text}>
+                      <p className={utilStyles.text}>
                         SIGN UP
-                      </text>
+                      </p>
                     </button>
                     </div>
                    

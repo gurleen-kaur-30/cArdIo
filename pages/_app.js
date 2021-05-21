@@ -6,13 +6,17 @@ import {firebaseConfig} from '../config/firebase.ts'
 
 initAuth()
 if (!firebase.apps.length) {
+
   try{
     firebase.initializeApp(firebaseConfig);
+
+
   } catch(e){
     console.log(e)
   }
 }else {
   firebase.app(); // if already initialized, use that one
+
 }
 
 function MyApp({ Component, pageProps }) {

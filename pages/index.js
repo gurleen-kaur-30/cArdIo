@@ -1,17 +1,17 @@
 import Head from 'next/head'
 import styles from '../styles/index.module.scss'
 import utilStyles from '../styles/util.module.scss'
-import GetStarted from '../components/getStarted.js'
 import Link from 'next/link'
 
 export default function Home() {
   return (
     <div>
-    <Head >
+    {/* <Head >
       <p className={utilStyles.heading2Xl}>cArdIo</p>
       <p className={utilStyles.headingXl}> Your personal AI trainer</p>
-    </Head>
-
+    </Head> */}
+    <p className={utilStyles.heading2Xl}> cArdIo </p>
+    <p className={utilStyles.heading2Xl}> Your personal AI trainer</p>
     <div className={styles.row}>
     <Link href={"/login"}>
     <button className={utilStyles.button}>
