@@ -7,5 +7,11 @@ module.exports = {
     },
     moduleNameMapper :{
         "\\.(css|less|scss|sass)$": "identity-obj-proxy"
-    }
+    },
+    coverageReporters: [
+        "text",
+        "html"
+      ],
+    verbose : true,
+    testResultsProcessor: "jest-junit",
   };

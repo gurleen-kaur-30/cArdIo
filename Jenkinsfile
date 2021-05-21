@@ -1,8 +1,4 @@
 pipeline {
-
-    tools{
-        nodejs 'default-nodejs'
-    }
     agent any
  
     stages {
@@ -17,7 +13,7 @@ pipeline {
                 
                 script{
                     withCredentials([file(credentialsId: 'env-var', variable: 'env_var')]) {
-                    // sh 'rm .env.local'
+                    sh 'rm .env.local'
                     sh "cp \$env_var .env.local"
                     }
                 }
@@ -27,10 +23,25 @@ pipeline {
         stage('Running tests'){
             steps{
                 script{
-                    sh 'yarn test --verbose'
+                    sh 'yarn test'
                 }
             }
+
+          post {
+        always {
+          publishHTML target: [
+            allowMissing         : false,
+            alwaysLinkToLastBuild: false,
+            keepAll             : true,
+            reportDir            : 'output/coverage/jest',
+            reportFiles          : 'index.html',
+            reportName           : 'Test Report'
+          ]
         }
+      }
+            
+        }
+        
          stage('Docker build'){
             steps{
                 script{
