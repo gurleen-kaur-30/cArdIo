@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import React from 'react'
 import TextInput from '../components/textinput'
+import PasswordInput from '../components/passwordInput'
 import styles from './styles/login.module.scss'
 import utilStyles from '../styles/util.module.scss'
 import { auth } from '../config/firebase.ts';
@@ -98,7 +99,7 @@ import firebase from 'firebase/app'
                       value={this.state.name}
                       onChange={this.setName}
                     />
-                <TextInput 
+                <PasswordInput
                       labelName={"Password"}
                       type={"text"}
                       value={this.state.password}

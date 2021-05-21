@@ -1,5 +1,6 @@
 import React from 'react'
 import TextInput from '../components/textinput'
+import PasswordInput from '../components/passwordInput'
 import styles from './styles/login.module.scss'
 import utilStyles from '../styles/util.module.scss'
 import { auth } from '../config/firebase.ts';
@@ -28,12 +29,7 @@ class Login extends React.Component {
   login () {
     console.log("logged in!");
     console.info("Logged user in");
-    // const log4js = require('log4js');
-    // log4js.configure("./log4js_config.json");
 
-    // // Create the logger
-    // logger = log4js.getLogger();
-    // logger.level = 'info';
     return auth
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((response) => {
@@ -59,7 +55,7 @@ class Login extends React.Component {
           onChange={this.setEmail}
         />
 
-        <TextInput 
+        <PasswordInput 
           labelName={"Password"}
           type={"text"}
           value={this.state.password}
