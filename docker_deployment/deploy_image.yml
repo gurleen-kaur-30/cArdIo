@@ -2,14 +2,14 @@
 - hosts: localhost
   connection: local
   vars:
-    ansible_python_interpreter: /usr/bin/python2.7
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: Stop the running docker
-      shell: docker stop cardio
-    - name: Remove the docker
-      shell: docker rm -f cardio
-    - name: Remove image of the docker
-      shell: docker image rm -f prateksha/cardio:latest
+    # - name: Stop the running docker
+    #   shell: docker stop cardio
+    # - name: Remove the docker
+    #   shell: docker rm -f cardio
+    # - name: Remove image of the docker
+    #   shell: docker image rm -f prateksha/cardio:latest
     - name: Pull image of cardio
       docker_image:
         name: prateksha/cardio
