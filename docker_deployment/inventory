@@ -1,0 +1,2 @@
+localhost ansible_user=prateksha
+ansible_python_interpreter=/usr/bin/python3
