@@ -1,10 +1,10 @@
 import React from 'react'
 import TextInput from '../components/textinput'
+import PasswordInput from '../components/passwordInput'
 import styles from './styles/login.module.scss'
 import utilStyles from '../styles/util.module.scss'
 import { auth } from '../config/firebase.ts';
 import Router from 'next/router'
-
 
 class Login extends React.Component {
   constructor(props){
@@ -28,6 +28,8 @@ class Login extends React.Component {
   }
   login () {
     console.log("logged in!");
+    console.info("Logged user in");
+
     return auth
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((response) => {
@@ -53,7 +55,7 @@ class Login extends React.Component {
           onChange={this.setEmail}
         />
 
-        <TextInput 
+        <PasswordInput 
           labelName={"Password"}
           type={"text"}
           value={this.state.password}

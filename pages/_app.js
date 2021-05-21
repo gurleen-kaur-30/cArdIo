@@ -2,12 +2,18 @@ import initAuth from '../utils/initAuth' // the module you created above
 import firebase from 'firebase/app'
 import { AuthProvider } from '../auth.tsx';
 import {firebaseConfig} from '../config/firebase.ts'
+import LogRocket from 'logrocket';
 
+LogRocket.init('ykm4ya/cardio');
+console.log("LogRocket initialzed");
 
 initAuth()
+
 if (!firebase.apps.length) {
 
   try{
+    // LogRocket.init('ykm4ya/cardio');
+    // console.log("LogRocket initialzed");
     firebase.initializeApp(firebaseConfig);
 
 
