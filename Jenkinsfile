@@ -23,7 +23,7 @@ pipeline {
         stage('Running tests'){
             steps{
                 script{
-                    sh 'yarn test'
+                    sh 'npm install && yarn test'
                 }
             }
 
