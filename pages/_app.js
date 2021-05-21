@@ -10,15 +10,19 @@ console.log("LogRocket initialzed");
 initAuth()
 
 if (!firebase.apps.length) {
+
   try{
     // LogRocket.init('ykm4ya/cardio');
     // console.log("LogRocket initialzed");
     firebase.initializeApp(firebaseConfig);
+
+
   } catch(e){
     console.log(e)
   }
 }else {
   firebase.app(); // if already initialized, use that one
+
 }
 
 function MyApp({ Component, pageProps }) {
