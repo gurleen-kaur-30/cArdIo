@@ -1,14 +1,8 @@
 import db from '../../../../utils/db'
-var log4js = require('log4js');
 
 export default async (req, res) => {
     try {
-      log4js.configure(require("../../../../log4js_config.json"));
-
     // Create the logger
-    logger = log4js.getLogger();
-    logger.level = 'info';
-    logger.info("Bicep curls");
       const { slug } = req.body;
       console.log(req.body.uid)
       console.log("timeee", new Date().getHours(), new Date().getMinutes())

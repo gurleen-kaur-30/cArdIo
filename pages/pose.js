@@ -12,6 +12,7 @@ export default class PoseNet extends React.Component {
     
 
   static defaultProps = {
+    model : null,
     // videoWidth: 600,
     // videoHeight: 500,
     videoWidth: 1000,
@@ -65,7 +66,11 @@ export default class PoseNet extends React.Component {
   }
 
   async componentDidMount() {
-    this.net = await posenet.load();
+    posenet.load().then(model => {
+      this.setState({
+        model: model
+      });
+    })
     try {
       await this.setupCamera()
     } catch(e) {
@@ -145,13 +150,12 @@ export default class PoseNet extends React.Component {
       skeletonLineWidth,
     } = this.props
 
-    const net = this.net
     const video = this.video
     
     const poseDetectionFrameInner = async () => {
       let poses = []
 
-    const pose = await net.estimateSinglePose(
+    const pose = await this.state.model.estimateSinglePose(
         video,
         imageScaleFactor,
         outputStride
